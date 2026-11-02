@@ -1,6 +1,7 @@
 {
   "name": "campuscircle",
   "version": "1.0.0",
+  "type": "module",
   "description": "CampusCircle - College Campus Marketplace & Lost/Found Auto-Matcher",
   "scripts": {
     "install:all": "npm install && npm --prefix server install && npm --prefix client install",
@@ -12,6 +13,15 @@
     "local": "bash start.sh",
     "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:client\"",
     "seed": "npm --prefix server run seed"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

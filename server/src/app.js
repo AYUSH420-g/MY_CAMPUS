@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.status(200).json({
     status: 'ok',
     app: 'CampusCircle API',
@@ -38,11 +38,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Mount Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/marketplace', marketplaceRoutes);
-app.use('/api/lost-found', lostFoundRoutes);
-app.use('/api/stats', statsRoutes);
+// Mount Routes (supporting both /api/* and root /* for Vercel Serverless)
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/marketplace', '/marketplace'], marketplaceRoutes);
+app.use(['/api/lost-found', '/lost-found'], lostFoundRoutes);
+app.use(['/api/stats', '/stats'], statsRoutes);
 
 // Serve frontend static assets if client/dist exists (Fullstack production deployments)
 if (fs.existsSync(clientDistPath)) {
