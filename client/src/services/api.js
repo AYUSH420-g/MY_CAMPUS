@@ -1,4 +1,11 @@
-const BASE_URL = '/api';
+// Dynamically determine API URL:
+// 1. In production with VITE_API_URL set (e.g. https://my-backend.onrender.com), point to it
+// 2. Otherwise default to relative '/api' (handled by Vite proxy locally or fullstack server)
+const rawBase = import.meta.env.VITE_API_URL || '';
+const cleanBase = rawBase.replace(/\/+$/, '');
+const BASE_URL = cleanBase
+  ? (cleanBase.endsWith('/api') ? cleanBase : `${cleanBase}/api`)
+  : '/api';
 
 async function request(endpoint, options = {}) {
   const token = localStorage.getItem('cc_token');
