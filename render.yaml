@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: campuscircle-backend
+    env: node
+    plan: free
+    buildCommand: npm install && npm --prefix server install
+    startCommand: node server/src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: campuscircle_super_secret_jwt_key_2026_dev
+      - key: MONGODB_URI
+        sync: false
